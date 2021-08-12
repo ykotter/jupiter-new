@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.edward.jupiter.domain.Pedido;
+import br.com.edward.jupiter.model.AddItemModel;
 import br.com.edward.jupiter.model.PedidoModel;
 import br.com.edward.jupiter.service.PedidoService;
 
@@ -25,6 +28,12 @@ public class PedidoController {
 	@PostMapping("/cadastrar/{id}")
 	public PedidoModel cadastrar(@PathVariable Long id) {
 		return new PedidoModel(pedidoService.cadastrar(id));
+	}
+	
+	@PutMapping("/adicionar")
+	public PedidoModel adicionar(@RequestBody AddItemModel model) {
+		Pedido p = pedidoService.adicionar(model);
+		return new PedidoModel(p);
 	}
 	
 	@PutMapping("/pagar/{id}")

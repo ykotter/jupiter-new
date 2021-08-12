@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.edward.jupiter.domain.Cliente;
 import br.com.edward.jupiter.domain.Pedido;
 import br.com.edward.jupiter.domain.Perfume;
+import br.com.edward.jupiter.model.AddItemModel;
 import br.com.edward.jupiter.repository.PedidoRepository;
 import br.com.edward.jupiter.service.ClienteService;
 import br.com.edward.jupiter.service.PedidoService;
@@ -52,4 +53,11 @@ public class PedidoServiceImpl implements PedidoService {
 		return p;
 	}
 
+	@Override
+	public Pedido adicionar(final AddItemModel model) {
+		Perfume perfume = perfumeService.consultar(model.getIdProduto());
+		Pedido p = this.consultar(model.getIdPedido());
+		p.addPerfume(perfume, model.getQtd());
+		return p;
+	}
 }

@@ -1,5 +1,6 @@
 package br.com.edward.jupiter.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class PedidoModel {
 	private ClienteModel cliente;
 	private LocalDateTime dataPedido;
 	private LocalDateTime dataPagamento;
+	private BigDecimal valorTotal;
 	
 	public PedidoModel(final Pedido domain) {
 		this.id = domain.getId();
@@ -27,5 +29,6 @@ public class PedidoModel {
 		this.cliente = new ClienteModel(domain.getCliente());
 		this.dataPedido = domain.getDataPedido();
 		this.dataPagamento = domain.getDataPagamento();
+		this.valorTotal = domain.getValorTotal();
 	}
 }
