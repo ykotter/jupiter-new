@@ -3,10 +3,7 @@ package br.com.edward.jupiter.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,18 +24,12 @@ public class PerfumeController {
 	private PerfumeService perfumeService;
 	
 	@PostMapping("/cadastrar")
-	public PerfumeModel cadastrar(@Valid @RequestBody PerfumeModel model, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-            throw new RuntimeException("Parametros incorretos.");
-        }
+	public PerfumeModel cadastrar(@RequestBody PerfumeModel model) {
 		return new PerfumeModel(perfumeService.cadastrar(model));
 	}
 	
 	@PutMapping("/alterar/{id}")
-	public PerfumeModel alterar(@PathVariable Long id, @Valid @RequestBody PerfumeModel model, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-            throw new RuntimeException("Parametros incorretos.");
-        }
+	public PerfumeModel alterar(@PathVariable Long id, @RequestBody PerfumeModel model) {
 		return new PerfumeModel(perfumeService.alterar(id, model));
 	}
 	

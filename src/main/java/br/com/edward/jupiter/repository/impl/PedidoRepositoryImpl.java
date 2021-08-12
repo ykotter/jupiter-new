@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.edward.jupiter.domain.Pedido;
 import br.com.edward.jupiter.repository.PedidoRepository;
 
+@Repository
 public class PedidoRepositoryImpl implements PedidoRepository {
 	
 	private final static List<Pedido> PEDIDOS = new ArrayList<Pedido>();
@@ -32,5 +35,4 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	public Optional<Pedido> consultar(Long id) {
 		return PEDIDOS.stream().filter(pe -> id.equals(pe.getId())).findFirst();
 	}
-
 }

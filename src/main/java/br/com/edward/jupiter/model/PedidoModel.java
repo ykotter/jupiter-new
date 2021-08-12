@@ -1,5 +1,6 @@
 package br.com.edward.jupiter.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,12 +12,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class PedidoModel {
+	
 	private Long id;
 	private EnumStatusPedido status;
 	private List<ItemPedidoModel> itens;
+	private ClienteModel cliente;
+	private LocalDateTime dataPedido;
+	private LocalDateTime dataPagamento;
 	
 	public PedidoModel(final Pedido domain) {
 		this.id = domain.getId();
 		this.itens = domain.getItens().stream().map(ItemPedidoModel::new).collect(Collectors.toList());
+		this.status = domain.getStatus();
+		this.cliente = new ClienteModel(domain.getCliente());
+		this.dataPedido = domain.getDataPedido();
+		this.dataPagamento = domain.getDataPagamento();
 	}
 }
